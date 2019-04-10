@@ -11,8 +11,10 @@ class Deck
 		Deck();
 		void shuffleDeck();
 		void generateDeck();
+		void dealCards(int numCards);
 		vector<Card> getDeck();
-		
+		vector<Card> hand;
 	private:
 		vector<Card> card_deck;
+		
 };

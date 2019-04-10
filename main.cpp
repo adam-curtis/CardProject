@@ -68,11 +68,42 @@ TEST_CASE("Test Deck")
 		vector<Card> temp = d1.getDeck();
 
 		REQUIRE(temp.size() == 52);
-		REQUIRE((temp[0].toString() == "2 of Clubs" && temp[1].toString() == "3 of Clubs" && temp[2].toString() == "4 of Clubs" && temp[3].toString() == "5 of Clubs" && temp[4].toString() == "6 of Clubs"));
 
 		d1.shuffleDeck();
-		temp = d1.getDeck();
-		REQUIRE((temp[0].toString() != "2 of Clubs" || temp[1].toString() != "3 of Clubs" || temp[2].toString() != "4 of Clubs" || temp[3].toString() != "5 of Clubs" || temp[4].toString() != "6 of Clubs"));
+		vector<Card> temp2 = d1.getDeck();
+		bool isShuffled = false;
+		for (int i = 1; i < temp.size(); i++)
+		{
+			if (!(temp[i-1] == temp[i]))
+				isShuffled = true;
+		}
+		REQUIRE(isShuffled == true);
+	}
+
+	SECTION("Deal Cards")
+	{
+		Deck d1;
+		d1.dealCards(5);
+		vector<Card> temp_deck = d1.getDeck();
+		REQUIRE(temp_deck.size() == 47);
+		REQUIRE(d1.hand.size() == 5);
+		bool isUniqueHand = true;
+		for (int i = 1; i < d1.hand.size(); i++)
+		{
+			for (int j = 0; j < temp_deck.size(); j++)
+			{
+				if (d1.hand[i] == temp_deck[j])
+					isUniqueHand = false;
+			}
+		}
+		REQUIRE(isUniqueHand == true);
+
+		d1.dealCards(2);
+		temp_deck = d1.getDeck();
+		REQUIRE(temp_deck.size() == 45);
+		REQUIRE(d1.hand.size() == 7);
+
+		REQUIRE_THROWS(d1.dealCards(100));
 	}
 
 }
