@@ -21,32 +21,32 @@ void Deck::generateDeck()
 		for (int j = 2; j <= 14; j++)
 		{
 			Card c(j, suits[i]);
-			if (find(card_deck.begin(), card_deck.end(), c) == card_deck.end())
+			if (find(cardDeck.begin(), cardDeck.end(), c) == cardDeck.end())
 			{
-				card_deck.push_back(c);
+				cardDeck.push_back(c);
 			}
 		}
 	}
 }
 vector<Card> Deck::getDeck()
 {
-	return card_deck;
+	return cardDeck;
 }
 
 void Deck::dealCards(int numCards)
 {
 	try
 	{
-		if (numCards > card_deck.size())
+		if ((size_t)numCards > cardDeck.size())
 			throw "Number of requested cards are not in deck.";
 		if (numCards < 0)
 			throw "Please enter a positive number.";
 
-		int currentDeckSize = card_deck.size() - 1;
+		int currentDeckSize = cardDeck.size() - 1;
 		for (int i = currentDeckSize; i > currentDeckSize - numCards; i--)
 		{
-			hand.push_back(card_deck[i]);
-			card_deck.pop_back();
+			hand.push_back(cardDeck[i]);
+			cardDeck.pop_back();
 		}
 	}
 	catch(string e)
@@ -58,5 +58,5 @@ void Deck::dealCards(int numCards)
 void Deck::shuffleDeck()
 {
 	srand((unsigned)time(NULL));
-	random_shuffle(card_deck.begin(), card_deck.end());
+	random_shuffle(cardDeck.begin(), cardDeck.end());
 }

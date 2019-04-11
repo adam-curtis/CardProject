@@ -15,6 +15,6 @@ class Deck
 		vector<Card> getDeck();
 		vector<Card> hand;
 	private:
-		vector<Card> card_deck;
+		vector<Card> cardDeck;
 		
 };

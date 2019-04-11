@@ -65,18 +65,16 @@ TEST_CASE("Test Deck")
 	SECTION("Test Unique & Shuffle" )
 	{
 		Deck d1;
-		vector<Card> temp = d1.getDeck();
-
-		REQUIRE(temp.size() == 52);
-
+		vector<Card> tempDeck = d1.getDeck();
 		d1.shuffleDeck();
-		vector<Card> temp2 = d1.getDeck();
+		vector<Card> tempDeck2 = d1.getDeck();
 		bool isShuffled = false;
-		for (int i = 1; i < temp.size(); i++)
+		for (size_t i = 0; i < tempDeck.size(); i++)
 		{
-			if (!(temp[i-1] == temp[i]))
+			if (!(tempDeck[i] == tempDeck2[i]))
 				isShuffled = true;
 		}
+		REQUIRE(tempDeck.size() == 52);
 		REQUIRE(isShuffled == true);
 	}
 
@@ -84,26 +82,31 @@ TEST_CASE("Test Deck")
 	{
 		Deck d1;
 		d1.dealCards(5);
-		vector<Card> temp_deck = d1.getDeck();
-		REQUIRE(temp_deck.size() == 47);
+		vector<Card> tempDeck = d1.getDeck();
+		REQUIRE(tempDeck.size() == 47);
 		REQUIRE(d1.hand.size() == 5);
+
 		bool isUniqueHand = true;
-		for (int i = 1; i < d1.hand.size(); i++)
+		for (size_t i = 1; i < d1.hand.size(); i++)
 		{
-			for (int j = 0; j < temp_deck.size(); j++)
+			for (size_t j = 0; j < tempDeck.size(); j++)
 			{
-				if (d1.hand[i] == temp_deck[j])
+				if (d1.hand[i] == tempDeck[j])
 					isUniqueHand = false;
 			}
 		}
 		REQUIRE(isUniqueHand == true);
 
 		d1.dealCards(2);
-		temp_deck = d1.getDeck();
-		REQUIRE(temp_deck.size() == 45);
+		tempDeck = d1.getDeck();
+		REQUIRE(tempDeck.size() == 45);
 		REQUIRE(d1.hand.size() == 7);
-
 		REQUIRE_THROWS(d1.dealCards(100));
 	}
+
+}
+
+TEST_CASE("Poker Evaluator")
+{
 
 }
