@@ -2,7 +2,6 @@
 #include "Card.h"
 #include "Deck.h"
 #include "PokerEvaluator.h"
-#include <unordered_set>
 using namespace std;
 
 #define CATCH_CONFIG_RUNNER
