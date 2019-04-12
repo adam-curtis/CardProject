@@ -5,6 +5,7 @@
 #include "Card.h"
 #include "PokerEvaluator.h"
 
+//Evaluates the best possible poker hand from seven given cards
 PokerEvaluator::PokerEvaluator(Card c1, Card c2, Card c3, Card c4, Card c5, Card c6, Card c7)
 {
 	pokerHand.push_back(c1);
@@ -28,7 +29,7 @@ string PokerEvaluator::getBestHand()
 		vector<Card> v;
 		cardNums.insert(pair<int,vector<Card>>(i, v));
 	}
-
+	//adds poker hand cards to suits counter and cardNums map
 	for (int i = 0; i < pokerHand.size(); i++)
 	{
 		int cardValue = pokerHand[i].getNumericValue();
@@ -54,6 +55,7 @@ string PokerEvaluator::getBestHand()
 			suits[3]++;
 	}
 
+	//checks if there is a straight and adds those cards to a vector
 	int counter = 0;
 	for (int i = 0; i < cardNums.size(); i++)
 	{
@@ -76,6 +78,7 @@ string PokerEvaluator::getBestHand()
 		}
 	}
 
+	//If there is a straight
 	if (counter >= 5)
 	{
 		typeOfStraight = true;
@@ -92,6 +95,7 @@ string PokerEvaluator::getBestHand()
 				suit_counter[3]++;
 		}
 
+		//Straight and Royal Flush
 		for (int i = 0; i < suit_counter.size(); i++)
 		{
 			if (suit_counter[i] >= 5)
@@ -111,12 +115,13 @@ string PokerEvaluator::getBestHand()
 			}
 		}
 	}
-	//--Four of a kind
+	
 	bool threeOfAKind = false;
 	bool onePair = false;
 	bool twoPair = false;
 	for (int i = 0; i < cardNums.size(); i++)
 	{
+		//Four of a kind
 		if (cardNums[i].size() == 4)
 		{
 			return "Four of a Kind";
@@ -138,12 +143,12 @@ string PokerEvaluator::getBestHand()
 		}
 
 	}
-	//--Full House
+	//Full House
 	if (threeOfAKind && onePair)
 	{
 		return "Full House";
 	}
-
+	
 	for (int i = 0; i < suits.size(); i++)
 	{
 		if (suits[i] >= 5)
@@ -152,28 +157,30 @@ string PokerEvaluator::getBestHand()
 		}
 	}
 
+	//Flush
 	if (typeOfFlush)
 	{
 		return "Flush";
 	}
-	else if (typeOfStraight)
+	else if (typeOfStraight) //Straight
 	{
 		return "Straight";
 	}
-	//--Three of a kind
+	//Three of a kind
 	if (threeOfAKind)
 	{
 		return "Three of a Kind";
 	}
-	else if (twoPair)
+	else if (twoPair) //Two Pair
 	{
 		return "Two Pair";
 	}
-	else if (onePair)
+	else if (onePair) //One Pair
 	{
 		return "One Pair";
 	}
 
+	//High Card
 	for (int i = cardNums.size() - 1; i >= 0; i--)
 	{
 		if (cardNums[i].size() == 1)

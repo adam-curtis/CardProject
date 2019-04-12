@@ -9,7 +9,7 @@ Card::Card(int n, string s)
 	setNumericValue(n);
 	setSuit(s);
 }
-//--
+//Returns Card string
 string Card::toString()
 {
 	string retVal;
@@ -39,12 +39,12 @@ string Card::toString()
 
 	return retVal;
 }
-//--
+//Returns numeric value of card
 int Card::getNumericValue()
 {
 	return (cardNumber % 13) + 2;
 }
-//--
+//Sets numeric value of card
 void Card::setNumericValue(int n)
 {
 	int suitStart = cardNumber / 13;
@@ -57,12 +57,13 @@ void Card::setNumericValue(int n)
 		cardNumber = suitStart;
 	}
 }
+//Gets suit of card
 string Card::getSuit()
 {
 	string suits[] = { "Clubs", "Diamonds", "Hearts", "Spades" };
 	return suits[cardNumber / 13];
 }
-//--
+//Sets suit of Card
 void Card::setSuit(string s)
 {
 	if (s == "Clubs") 
@@ -87,6 +88,7 @@ void Card::setSuit(string s)
 	}
 }
 
+//Checks if cards are equal to eachother
 bool Card::operator==(Card const& rhs)
 {
 	if (cardNumber == rhs.cardNumber)

@@ -12,6 +12,7 @@ Deck::Deck()
 	generateDeck();
 };
 
+//generates deck with all unique 52 cards
 void Deck::generateDeck()
 {
 	string suits[] = { "Clubs", "Diamonds", "Hearts", "Spades" };
@@ -28,11 +29,13 @@ void Deck::generateDeck()
 		}
 	}
 }
+//get vector of cards
 vector<Card> Deck::getDeck()
 {
 	return cardDeck;
 }
 
+//deal certain number of cards from deck, remove them from deck vector and add them to the hand
 void Deck::dealCards(int numCards)
 {
 	try
@@ -55,6 +58,7 @@ void Deck::dealCards(int numCards)
 	}
 }
 
+//random shuffle deck cards
 void Deck::shuffleDeck()
 {
 	srand((unsigned)time(NULL));

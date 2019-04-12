@@ -118,6 +118,7 @@ TEST_CASE("Test Deck")
 
 TEST_CASE("Poker Evaluator")
 {
+	//Tests royal/straight flush, and regular flush/straights
 	SECTION("Royal Flush, Straight Flush, Flush, Straight")
 	{
 		Card c1(10, "Spades");
@@ -154,6 +155,7 @@ TEST_CASE("Poker Evaluator")
 		REQUIRE(p5.getBestHand() == "Flush");
 	}
 
+	//Test low ace straight flush
 	SECTION("Test Low Ace Straight")
 	{
 		Card c1(2, "Spades");
@@ -167,6 +169,7 @@ TEST_CASE("Poker Evaluator")
 		REQUIRE(p1.getBestHand() == "Straight Flush");
 	}
 
+	//Four of a kind test
 	SECTION("Test 4 of a kind")
 	{
 		Card c1(2, "Diamonds");
@@ -180,6 +183,7 @@ TEST_CASE("Poker Evaluator")
 		REQUIRE(p1.getBestHand() == "Four of a Kind");
 	}
 
+	//Full House test
 	SECTION("Test Full House")
 	{
 		Card c1(2, "Diamonds");
@@ -192,7 +196,8 @@ TEST_CASE("Poker Evaluator")
 		PokerEvaluator p1(c1, c2, c3, c4, c5, c6, c7);
 		REQUIRE(p1.getBestHand() == "Full House");
 	}
-
+	
+	//Test Three of a kind
 	SECTION("Test 3 of a kind")
 	{
 		Card c1(8, "Diamonds");
@@ -206,6 +211,7 @@ TEST_CASE("Poker Evaluator")
 		REQUIRE(p1.getBestHand() == "Three of a Kind");
 	}
 
+	//Test Two Pair
 	SECTION("Test Two Pair")
 	{
 		Card c1(8, "Diamonds");
@@ -219,6 +225,7 @@ TEST_CASE("Poker Evaluator")
 		REQUIRE(p1.getBestHand() == "Two Pair");
 	}
 
+	//Test One Pair
 	SECTION("Test One Pair")
 	{
 		Card c1(8, "Diamonds");
@@ -232,7 +239,8 @@ TEST_CASE("Poker Evaluator")
 		REQUIRE(p1.getBestHand() == "One Pair");
 	}
 
-	SECTION("Test 3 of a kind")
+	//Test High Card
+	SECTION("High Card")
 	{
 		Card c1(8, "Diamonds");
 		Card c2(5, "Hearts");

@@ -4,6 +4,7 @@
 
 using namespace std;
 
+//PokerEvaluator class
 class PokerEvaluator
 {
 	

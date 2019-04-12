@@ -5,6 +5,7 @@
 
 using namespace std;
 
+//Deck class
 class Deck
 {
 	public:
